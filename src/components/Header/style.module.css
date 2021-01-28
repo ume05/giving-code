@@ -1,0 +1,4 @@
+.innr {
+  width: 1200px;
+  max-width: calc(100% - 56px);
+}
