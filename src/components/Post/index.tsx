@@ -3,11 +3,11 @@ import Link from 'next/link'
 import style from './style.module.css'
 
 type Props = {
-  imagePath?: string
+  imagePath?: string | null
   lg?: boolean
   day: string
   title: string
-  category: string
+  category?: string | null
   text: string
   linkPath: string
   categoryPath: string

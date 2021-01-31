@@ -1,0 +1,6 @@
+.innr {
+  width: 600px;
+  max-width: calc(100% - 56px);
+  margin: 0 auto;
+  text-align: center;
+}

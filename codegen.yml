@@ -1,0 +1,6 @@
+overwrite: true
+schema: "https://api-ap-northeast-1.graphcms.com/v2/ckkkctgxq22nq01waeyp43swo/master"
+generates:
+  src/type/graphql.d.ts:
+    plugins:
+      - "typescript"
