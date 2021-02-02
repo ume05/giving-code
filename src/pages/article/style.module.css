@@ -28,7 +28,27 @@
   }
 
   & p {
+    margin-bottom: 20px;
     line-height: 2;
+  }
+
+  & ul {
+    margin-bottom: 20px;
+    padding-left: 16px;
+    list-style-type: disc;
+  }
+
+  & ol {
+    margin-bottom: 20px;
+    padding-left: 16px;
+    list-style-type: decimal;
+  }
+
+  & code {
+    display: block;
+    padding: 20px;
+    font-size: 14px;
+    background-color: #f5f2f0;
   }
 }
 

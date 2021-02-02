@@ -4,9 +4,18 @@ import Link from 'next/link'
 type Props = {
   headingDisplay?: boolean
   headingTitle?: string
+  headingDay?: Date
+  headingCategoryName?: string | null
+  headingCategorySlug?: string | null
 }
 
-const Heading: React.FC<Props> = ({ headingDisplay, headingTitle }) => {
+const Heading: React.FC<Props> = ({
+  headingDisplay,
+  headingTitle,
+  headingDay,
+  headingCategoryName,
+  headingCategorySlug
+}) => {
   return (
     <>
       {headingDisplay && (
@@ -14,7 +23,7 @@ const Heading: React.FC<Props> = ({ headingDisplay, headingTitle }) => {
           <div className={style.innr}>
             <p className="mb-3">
               <span className="text-white text-xs bg-marine p-2">
-                2020年2月15日
+                {headingDay}
               </span>
             </p>
             <h1 className="text-2xl font-bold leading-loose mb-1">
@@ -22,8 +31,8 @@ const Heading: React.FC<Props> = ({ headingDisplay, headingTitle }) => {
             </h1>
             <p>
               <span className="text-xs text-gray-100">
-                <Link href="/">
-                  <a>カテゴリ</a>
+                <Link href={`/${headingCategorySlug}`}>
+                  <a>{headingCategoryName}</a>
                 </Link>
               </span>
             </p>

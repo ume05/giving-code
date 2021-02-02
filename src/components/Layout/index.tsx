@@ -8,6 +8,9 @@ import style from './style.module.css'
 type Props = {
   headingDisplay?: boolean
   headingTitle?: string
+  headingDay?: Date
+  headingCategoryName?: string | null
+  headingCategorySlug?: string | null
   isHeading?: boolean
 }
 
@@ -15,6 +18,9 @@ const Layout: React.FC<Props> = ({
   children,
   headingDisplay,
   headingTitle,
+  headingDay,
+  headingCategoryName,
+  headingCategorySlug,
   isHeading
 }) => {
   return (
@@ -22,7 +28,13 @@ const Layout: React.FC<Props> = ({
       <Header />
       <main>
         <MV isHeading={isHeading} />
-        <Heading headingDisplay={headingDisplay} headingTitle={headingTitle} />
+        <Heading
+          headingDisplay={headingDisplay}
+          headingTitle={headingTitle}
+          headingDay={headingDay}
+          headingCategoryName={headingCategoryName}
+          headingCategorySlug={headingCategorySlug}
+        />
         <div className={`${style.wrapper} pt-8 pb-20`}>
           <div className={style.innr}>{children}</div>
           <Sidebar />

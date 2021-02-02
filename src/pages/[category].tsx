@@ -1,16 +1,39 @@
 import Layout from '@/components/Layout'
 import Post from '@/components/Post'
 import style from './style.module.css'
-import { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { gql } from '@apollo/client'
 import { client } from '@/pages/_app'
 import { Post as PostType } from '@/type/graphql'
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await client.query({
     query: gql`
-      query allPost {
-        posts {
+      query categoryPaths {
+        categories {
+          slug
+        }
+      }
+    `
+  })
+  const paths = data.categories.map((category) => {
+    return `/${category.slug}/`
+  })
+  return {
+    paths,
+    fallback: false
+  }
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  let slug
+  if (context.params) {
+    slug = context.params.category
+  }
+  const { data } = await client.query({
+    query: gql`
+      query Category {
+        posts(where: {categories_some: {slug: "${slug}"}}) {
           date
           id
           title
@@ -31,24 +54,24 @@ export const getStaticProps: GetStaticProps = async () => {
   })
   return {
     props: {
-      allpost: data
+      postData: data
     }
   }
 }
 
 type Props = {
-  allpost: {
+  postData: {
     posts: PostType[]
   }
 }
 
-const Index: React.FC<Props> = ({ allpost }) => {
+const Category: React.FC<Props> = ({ postData }) => {
   return (
     <>
       <Layout isHeading={true}>
         <div className={style.container}>
-          {allpost &&
-            allpost.posts.map((post, i) => (
+          {postData &&
+            postData.posts.map((post, i) => (
               <Post
                 key={post.id}
                 lg={i === 0 && true}
@@ -67,4 +90,4 @@ const Index: React.FC<Props> = ({ allpost }) => {
   )
 }
 
-export default Index
+export default Category
