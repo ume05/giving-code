@@ -3,7 +3,7 @@ import style from './style.module.css'
 const Footer: React.FC = () => {
   return (
     <>
-      <div className={`${style.wrapper} pt-10 pb-14`}>
+      <footer className={`${style.wrapper} pt-10 pb-14`}>
         <div className={style.innr}>
           <ul className="mb-16">
             <li className="inline-block mr-4">カテゴリ1</li>
@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
             &copy;2021 Giving Code
           </small>
         </div>
-      </div>
+      </footer>
     </>
   )
 }

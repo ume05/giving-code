@@ -12,7 +12,8 @@ module.exports = {
         200: '#555555',
         300: '#d9d9d9',
         400: '#eeeeee'
-      }
+      },
+      modal: 'rgba(0,0,0,0.7)'
     }
   },
   variants: {},

@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { data } = await client.query({
     query: gql`
       query Category {
-        posts(where: {categories_some: {slug: "${slug}"}}) {
+        posts(where: {categories_some: {slug: "${slug}"}}, orderBy: date_DESC) {
           date
           id
           title
@@ -69,6 +69,9 @@ const Category: React.FC<Props> = ({ postData }) => {
   return (
     <>
       <Layout isHeading={true}>
+        <p className="text-lg font-bold mb-4">
+          「{postData && postData.posts[0].categories[0].name}」の記事一覧
+        </p>
         <div className={style.container}>
           {postData &&
             postData.posts.map((post, i) => (

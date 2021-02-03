@@ -10,7 +10,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const { data } = await client.query({
     query: gql`
       query allPost {
-        posts {
+        posts(orderBy: date_DESC) {
           date
           id
           title

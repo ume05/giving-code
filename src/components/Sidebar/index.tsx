@@ -6,7 +6,7 @@ import { Post as PostType } from '@/type/graphql'
 
 const sidebarData = gql`
   query Sidebar {
-    posts(where: { popular: true }) {
+    posts(where: { popular: true }, orderBy: date_DESC) {
       id
       title
       slug
@@ -24,11 +24,24 @@ type postData = {
   posts: PostType[]
 }
 
-const Sidebar: React.FC = () => {
+type Props = {
+  onModalFlag: () => void
+}
+
+const Sidebar: React.FC<Props> = ({ onModalFlag }) => {
   const { data } = useQuery<postData>(sidebarData)
   return (
     <>
       <aside className={style.wrapper}>
+        <div className={style.search}>
+          <h2>SEARCH</h2>
+          <div className={style.content}>
+            <button onClick={onModalFlag} className={style.button}>
+              <Img src="/image/search.svg" width={24} height={24} />
+              <span>検索する</span>
+            </button>
+          </div>
+        </div>
         <div className={style.popular}>
           <h2>POPULAR</h2>
           <div className={style.content}>
