@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout'
 import Post from '@/components/Post'
+import Motion from '@/components/Motion'
 import style from './style.module.css'
 import { GetStaticProps } from 'next'
 import { gql } from '@apollo/client'
@@ -46,22 +47,24 @@ const Index: React.FC<Props> = ({ allpost }) => {
   return (
     <>
       <Layout isHeading={true}>
-        <div className={style.container}>
-          {allpost &&
-            allpost.posts.map((post, i) => (
-              <Post
-                key={post.id}
-                lg={i === 0 && true}
-                day={post.date}
-                title={post.title}
-                category={post.categories[0].name}
-                text={post.content.text}
-                imagePath={post.coverImage?.url}
-                linkPath={`/article/${post.slug}/`}
-                categoryPath={`/${post.categories[0].slug}/`}
-              />
-            ))}
-        </div>
+        <Motion name="index">
+          <div className={style.container}>
+            {allpost &&
+              allpost.posts.map((post, i) => (
+                <Post
+                  key={post.id}
+                  lg={i === 0 && true}
+                  day={post.date}
+                  title={post.title}
+                  category={post.categories[0].name}
+                  text={post.content.text}
+                  imagePath={post.coverImage?.url}
+                  linkPath={`/article/${post.slug}/`}
+                  categoryPath={`/${post.categories[0].slug}/`}
+                />
+              ))}
+          </div>
+        </Motion>
       </Layout>
     </>
   )

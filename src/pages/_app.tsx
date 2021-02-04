@@ -1,7 +1,9 @@
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { AppProps } from 'next/app'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 import nprogress from 'nprogress'
+import { AnimatePresence } from 'framer-motion'
 import 'nprogress/nprogress.css'
 import '@/styles/global.css'
 
@@ -20,9 +22,12 @@ function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     nprogress.done()
   })
+  const router = useRouter()
   return (
     <ApolloProvider client={client}>
-      <Component {...pageProps} />
+      <AnimatePresence exitBeforeEnter initial={false}>
+        <Component {...pageProps} key={router.asPath} />
+      </AnimatePresence>
     </ApolloProvider>
   )
 }

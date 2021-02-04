@@ -1,6 +1,7 @@
 import Layout from '@/components/Layout'
 import Img from 'next/image'
 import style from './style.module.css'
+import Motion from '@/components/Motion'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { gql } from '@apollo/client'
 import { client } from '@/pages/_app'
@@ -73,26 +74,28 @@ const Article: React.FC<Props> = ({ postData }) => {
         headingCategoryName={postData.post.categories[0].name}
         headingCategorySlug={postData.post.categories[0].slug}
       >
-        <article className={style.container}>
-          <div className={style.thumbnail}>
-            <figure>
-              <Img
-                src={
-                  postData.post.coverImage
-                    ? postData.post.coverImage.url
-                    : '/image/sample.jpg'
-                }
-                width={920}
-                height={404}
-              />
-            </figure>
-          </div>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: postData.post.content.html
-            }}
-          ></div>
-        </article>
+        <Motion name={postData.post.title}>
+          <article className={style.container}>
+            <div className={style.thumbnail}>
+              <figure>
+                <Img
+                  src={
+                    postData.post.coverImage
+                      ? postData.post.coverImage.url
+                      : '/image/sample.jpg'
+                  }
+                  width={920}
+                  height={404}
+                />
+              </figure>
+            </div>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: postData.post.content.html
+              }}
+            ></div>
+          </article>
+        </Motion>
       </Layout>
     </>
   )
