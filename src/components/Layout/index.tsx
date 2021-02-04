@@ -46,6 +46,7 @@ const Layout: React.FC<Props> = ({
           headingCategoryName={headingCategoryName}
           headingCategorySlug={headingCategorySlug}
         />
+
         <div className={`${style.wrapper} pt-8 pb-20`}>
           <div className={style.innr}>{children}</div>
           <Sidebar onModalFlag={onModalFlag} />

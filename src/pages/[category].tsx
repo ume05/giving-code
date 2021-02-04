@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout'
 import Post from '@/components/Post'
+import Motion from '@/components/Motion'
 import style from './style.module.css'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { gql } from '@apollo/client'
@@ -69,25 +70,33 @@ const Category: React.FC<Props> = ({ postData }) => {
   return (
     <>
       <Layout isHeading={true}>
-        <p className="text-lg font-bold mb-4">
-          「{postData && postData.posts[0].categories[0].name}」の記事一覧
-        </p>
-        <div className={style.container}>
-          {postData &&
-            postData.posts.map((post, i) => (
-              <Post
-                key={post.id}
-                lg={i === 0 && true}
-                day={post.date}
-                title={post.title}
-                category={post.categories[0].name}
-                text={post.content.text}
-                imagePath={post.coverImage?.url}
-                linkPath={`/article/${post.slug}/`}
-                categoryPath={`/${post.categories[0].slug}/`}
-              />
-            ))}
-        </div>
+        <Motion
+          name={
+            postData.posts[0].categories[0].slug
+              ? postData.posts[0].categories[0].slug
+              : 'category'
+          }
+        >
+          <p className="text-lg font-bold mb-4">
+            「{postData && postData.posts[0].categories[0].name}」の記事一覧
+          </p>
+          <div className={style.container}>
+            {postData &&
+              postData.posts.map((post, i) => (
+                <Post
+                  key={post.id}
+                  lg={i === 0 && true}
+                  day={post.date}
+                  title={post.title}
+                  category={post.categories[0].name}
+                  text={post.content.text}
+                  imagePath={post.coverImage?.url}
+                  linkPath={`/article/${post.slug}/`}
+                  categoryPath={`/${post.categories[0].slug}/`}
+                />
+              ))}
+          </div>
+        </Motion>
       </Layout>
     </>
   )

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'next/link'
 import style from './style.module.css'
 import { gql, useQuery } from '@apollo/client'
@@ -64,36 +65,46 @@ const SearchModal: React.FC<Props> = ({ offModalFlag }) => {
         className="absolute inset-0 w-full h-full bg-modal z-40"
         onClick={offModalFlag}
       ></div>
-      <div className={style.content}>
-        <button onClick={offModalFlag} className={style.button} />
-        <input
-          className={style.input}
-          type="text"
-          placeholder="検索ワードを入力"
-          onChange={handleInputChange}
-        />
-        <p className="p-4 my-4 bg-gray-300">
-          {query && result
-            ? `${query}の検索結果：${result?.length}件の記事があります`
-            : result
-            ? `${result?.length}件の記事があります`
-            : '0件の記事があります'}
-        </p>
-        <ul className={style.data}>
-          {result &&
-            result.map((post) => (
-              <li onClick={offModalFlag} key={post.id}>
-                <Link href={`/article/${post.slug}`}>
-                  <a>
-                    {post.title}
-                    <br />
-                    <span className="text-sm">{post.date}</span>
-                  </a>
-                </Link>
-              </li>
-            ))}
-        </ul>
-      </div>
+      <AnimatePresence initial={true}>
+        <motion.div
+          key="modal"
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className={style.content}>
+            <button onClick={offModalFlag} className={style.button} />
+            <input
+              className={style.input}
+              type="text"
+              placeholder="検索ワードを入力"
+              onChange={handleInputChange}
+            />
+            <p className="p-4 my-4 bg-gray-300">
+              {query && result
+                ? `${query}の検索結果：${result?.length}件の記事があります`
+                : result
+                ? `${result?.length}件の記事があります`
+                : '0件の記事があります'}
+            </p>
+            <ul className={style.data}>
+              {result &&
+                result.map((post) => (
+                  <li onClick={offModalFlag} key={post.id}>
+                    <Link href={`/article/${post.slug}`}>
+                      <a>
+                        {post.title}
+                        <br />
+                        <span className="text-sm">{post.date}</span>
+                      </a>
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   )
 }
