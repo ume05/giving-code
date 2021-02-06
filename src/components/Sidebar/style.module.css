@@ -3,7 +3,7 @@
 }
 
 .search {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   & h2 {
     height: 52px;
     font-weight: bold;
@@ -24,17 +24,24 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 10px 0;
+    padding: 10px 29px 10px 0;
     border: 2px solid #000;
     border-radius: 30px;
+    transition: all 0.3s;
 
     & span {
+      margin-left: 10px;
+    }
 
+    &:hover {
+      letter-spacing: 2px;
+      transition: all 0.3s;
     }
   }
 }
 
 .popular {
+  margin-bottom: 40px;
   & h2 {
     height: 52px;
     font-weight: bold;
@@ -125,6 +132,26 @@
         transform: scale(1.05);
         transition: all 0.3s;
       }
+    }
+  }
+}
+
+.author {
+  & h2 {
+    height: 52px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 46px;
+    text-align: center;
+    border: 3px solid #d9d9d9;
+    border-bottom: 2px solid #d9d9d9;
+  }
+  & .content {
+    padding: 10px;
+    border: 1px solid #d9d9d9;
+    & .authorImage {
+      margin-bottom: 10px;
+      padding: 0 14px;
     }
   }
 }

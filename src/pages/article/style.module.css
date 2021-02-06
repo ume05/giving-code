@@ -28,7 +28,8 @@
   }
 
   & p {
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     line-height: 2;
   }
 
@@ -46,9 +47,10 @@
 
   & code {
     display: block;
-    padding: 20px;
+    padding: 2px 20px;
+    color: #fff;
     font-size: 14px;
-    background-color: #f5f2f0;
+    background-color: #000;
   }
 }
 
