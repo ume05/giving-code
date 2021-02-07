@@ -1,6 +1,7 @@
 import Layout from '@/components/Layout'
 import Post from '@/components/Post'
 import Motion from '@/components/Motion'
+import SEO from '@/components/SEO'
 import style from './style.module.css'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { gql } from '@apollo/client'
@@ -44,6 +45,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
           }
           content {
             text
+            raw
           }
           categories {
             name
@@ -69,7 +71,20 @@ type Props = {
 const Category: React.FC<Props> = ({ postData }) => {
   return (
     <>
-      <Layout isHeading={true}>
+      <SEO
+        title={postData.posts[0].categories[0].name}
+        description={postData.posts[0].categories[0].name}
+        slug={postData.posts[0].categories[0].slug}
+      />
+      <Layout
+        isHeading={true}
+        breadLists={[
+          {
+            title: postData.posts[0].categories[0].name,
+            slug: postData.posts[0].categories[0].slug
+          }
+        ]}
+      >
         <Motion
           name={
             postData.posts[0].categories[0].slug
@@ -77,9 +92,6 @@ const Category: React.FC<Props> = ({ postData }) => {
               : 'category'
           }
         >
-          <p className="text-lg font-bold mb-4">
-            「{postData && postData.posts[0].categories[0].name}」の記事一覧
-          </p>
           <div className={style.container}>
             {postData &&
               postData.posts.map((post, i) => (
@@ -89,7 +101,7 @@ const Category: React.FC<Props> = ({ postData }) => {
                   day={post.date}
                   title={post.title}
                   category={post.categories[0].name}
-                  text={post.content.text}
+                  text={post.content.raw.children[0].children[0].text}
                   imagePath={post.coverImage?.url}
                   linkPath={`/article/${post.slug}/`}
                   categoryPath={`/${post.categories[0].slug}/`}

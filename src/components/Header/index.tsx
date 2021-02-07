@@ -2,7 +2,11 @@ import Img from 'next/image'
 import Link from 'next/link'
 import style from './style.module.css'
 
-const Header: React.FC = () => {
+type Props = {
+  onModalFlag: () => void
+}
+
+const Header: React.FC<Props> = ({ onModalFlag }) => {
   return (
     <header className="shadow-xl">
       <nav
@@ -20,11 +24,21 @@ const Header: React.FC = () => {
             </a>
           </Link>
         </div>
-        <ul>
-          <li className="inline-block">カテゴリ1</li>
-          <li className="inline-block">カテゴリ2</li>
-          <li className="inline-block">カテゴリ3</li>
+        <ul className="hidden md:block">
+          <li className="inline-block mr-4">
+            <Link href="/test-category">
+              <a className="hover:text-primary">テスト</a>
+            </Link>
+          </li>
+          <li className="inline-block">
+            <Link href="/sample-category">
+              <a className="hover:text-primary">サンプルカテゴリー</a>
+            </Link>
+          </li>
         </ul>
+        <button onClick={onModalFlag} className={style.button}>
+          <Img src="/image/search.svg" width={24} height={24} />
+        </button>
       </nav>
     </header>
   )

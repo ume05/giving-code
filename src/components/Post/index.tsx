@@ -28,11 +28,18 @@ const Post: React.FC<Props> = ({
       <div className={`${style.container} ${lg ? style.lg : ''}`}>
         <Link href={linkPath}>
           <a className={style.image}>
-            <figure>
+            <figure className="hidden md:block">
               <Img
                 src={imagePath ? imagePath : '/image/sample.jpg'}
                 width={lg ? 920 : 445}
                 height={lg ? 405 : 260}
+              ></Img>
+            </figure>
+            <figure className="md:hidden">
+              <Img
+                src={imagePath ? imagePath : '/image/sample.jpg'}
+                width={920}
+                height={405}
               ></Img>
             </figure>
           </a>

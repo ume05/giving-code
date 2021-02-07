@@ -1704,7 +1704,8 @@ export type ImageTransformationInput = {
 /** Locale system enumeration */
 export enum Locale {
   /** System locale */
-  En = 'en'
+  En = 'en',
+  JaJp = 'ja_JP'
 }
 
 /** Representing a geolocation point with latitude and longitude */
@@ -3109,10 +3110,10 @@ export type Post = Node & {
   date: Scalars['Date'];
   /** Add a short excerpt to summarize this post */
   excerpt?: Maybe<Scalars['String']>;
+  /** write your content */
+  content: RichText;
   /** Upload or select a cover image to set as your Featured Image */
   coverImage?: Maybe<Asset>;
-  /** Write your blog post! */
-  content: RichText;
   /** Add any relevant tags to this blog post */
   tags: Array<Scalars['String']>;
   /** Who should be credited with writing this post? */
@@ -3120,6 +3121,7 @@ export type Post = Node & {
   /** Attach an SEO model to this post */
   seo?: Maybe<Seo>;
   categories: Array<Category>;
+  popular?: Maybe<Scalars['Boolean']>;
   /** List of Post versions */
   history: Array<Version>;
 };
@@ -3189,12 +3191,13 @@ export type PostCreateInput = {
   slug: Scalars['String'];
   date: Scalars['Date'];
   excerpt?: Maybe<Scalars['String']>;
-  coverImage?: Maybe<AssetCreateOneInlineInput>;
   content: Scalars['RichTextAST'];
+  coverImage?: Maybe<AssetCreateOneInlineInput>;
   tags?: Maybe<Array<Scalars['String']>>;
   author?: Maybe<AuthorCreateOneInlineInput>;
   seo?: Maybe<SeoCreateOneInlineInput>;
   categories?: Maybe<CategoryCreateManyInlineInput>;
+  popular?: Maybe<Scalars['Boolean']>;
 };
 
 export type PostCreateManyInlineInput = {
@@ -3382,6 +3385,9 @@ export type PostManyWhereInput = {
   categories_every?: Maybe<CategoryWhereInput>;
   categories_some?: Maybe<CategoryWhereInput>;
   categories_none?: Maybe<CategoryWhereInput>;
+  popular?: Maybe<Scalars['Boolean']>;
+  /** All values that are not equal to given value. */
+  popular_not?: Maybe<Scalars['Boolean']>;
 };
 
 export enum PostOrderByInput {
@@ -3402,7 +3408,9 @@ export enum PostOrderByInput {
   ExcerptAsc = 'excerpt_ASC',
   ExcerptDesc = 'excerpt_DESC',
   TagsAsc = 'tags_ASC',
-  TagsDesc = 'tags_DESC'
+  TagsDesc = 'tags_DESC',
+  PopularAsc = 'popular_ASC',
+  PopularDesc = 'popular_DESC'
 }
 
 export type PostUpdateInput = {
@@ -3410,12 +3418,13 @@ export type PostUpdateInput = {
   slug?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['Date']>;
   excerpt?: Maybe<Scalars['String']>;
-  coverImage?: Maybe<AssetUpdateOneInlineInput>;
   content?: Maybe<Scalars['RichTextAST']>;
+  coverImage?: Maybe<AssetUpdateOneInlineInput>;
   tags?: Maybe<Array<Scalars['String']>>;
   author?: Maybe<AuthorUpdateOneInlineInput>;
   seo?: Maybe<SeoUpdateOneInlineInput>;
   categories?: Maybe<CategoryUpdateManyInlineInput>;
+  popular?: Maybe<Scalars['Boolean']>;
 };
 
 export type PostUpdateManyInlineInput = {
@@ -3441,6 +3450,7 @@ export type PostUpdateManyInput = {
   excerpt?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['RichTextAST']>;
   tags?: Maybe<Array<Scalars['String']>>;
+  popular?: Maybe<Scalars['Boolean']>;
 };
 
 export type PostUpdateManyWithNestedWhereInput = {
@@ -3648,6 +3658,9 @@ export type PostWhereInput = {
   categories_every?: Maybe<CategoryWhereInput>;
   categories_some?: Maybe<CategoryWhereInput>;
   categories_none?: Maybe<CategoryWhereInput>;
+  popular?: Maybe<Scalars['Boolean']>;
+  /** All values that are not equal to given value. */
+  popular_not?: Maybe<Scalars['Boolean']>;
 };
 
 /** References Post record uniquely */

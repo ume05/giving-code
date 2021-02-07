@@ -5,6 +5,7 @@ import Heading from '@/components/Heading'
 import Sidebar from '@/components/Sidebar'
 import Footer from '@/components/Footer'
 import SearchModal from '@/components/SearchModal'
+import BreadCrumb from '@/components/BreadCrumb'
 import style from './style.module.css'
 
 type Props = {
@@ -14,6 +15,10 @@ type Props = {
   headingCategoryName?: string | null
   headingCategorySlug?: string | null
   isHeading?: boolean
+  breadLists?: {
+    title?: string | null
+    slug?: string | null
+  }[]
 }
 
 const Layout: React.FC<Props> = ({
@@ -23,7 +28,8 @@ const Layout: React.FC<Props> = ({
   headingDay,
   headingCategoryName,
   headingCategorySlug,
-  isHeading
+  isHeading,
+  breadLists
 }) => {
   const [isModal, setIsModal] = useState(false)
   const onModalFlag = () => {
@@ -36,7 +42,7 @@ const Layout: React.FC<Props> = ({
   }
   return (
     <>
-      <Header />
+      <Header onModalFlag={onModalFlag} />
       <main>
         <MV isHeading={isHeading} />
         <Heading
@@ -46,7 +52,7 @@ const Layout: React.FC<Props> = ({
           headingCategoryName={headingCategoryName}
           headingCategorySlug={headingCategorySlug}
         />
-
+        {breadLists && <BreadCrumb breadLists={breadLists} />}
         <div className={`${style.wrapper} pt-8 pb-20`}>
           <div className={style.innr}>{children}</div>
           <Sidebar onModalFlag={onModalFlag} />

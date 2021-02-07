@@ -1,0 +1,27 @@
+.breadcrumb {
+  width: 1200px;
+  max-width: calc(100% - 56px);
+  margin: 10px auto -10px;
+}
+
+.list {
+  display: inline-block;
+  font-size: 14px;
+  &:not(:last-child) {
+    position: relative;
+    margin-right: 8px;
+    padding-right: 16px;
+    &::after {
+      position: absolute;
+      top: -1px;
+      right: 0;
+      display: inline-block;
+      content: '>'
+    }
+  }
+  & a {
+    &:hover {
+      color: #D1603B;
+    }
+  }
+}

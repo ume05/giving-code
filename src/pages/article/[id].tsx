@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import Layout from '@/components/Layout'
+import SEO from '@/components/SEO'
 import Img from 'next/image'
 import style from './style.module.css'
 import Motion from '@/components/Motion'
@@ -37,6 +39,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         post(where: { slug: "${slug}" }) {
           title
           date
+          slug
           coverImage {
             url
           }
@@ -65,14 +68,35 @@ type Props = {
 }
 
 const Article: React.FC<Props> = ({ postData }) => {
+  useEffect(() => {
+    const pElements = document.querySelectorAll('p')
+    pElements.forEach((pElement) => {
+      if (pElement.firstChild?.nodeName === 'CODE') {
+        pElement.setAttribute('style', 'margin-top:0;margin-bottom:0;')
+      }
+    })
+  })
   return (
     <>
+      <SEO
+        title={postData.post.title}
+        description={postData.post.title}
+        slug={`article/${postData.post.slug}`}
+        image={postData.post.coverImage}
+      />
       <Layout
         headingDisplay={true}
         headingTitle={postData.post.title}
         headingDay={postData.post.date}
         headingCategoryName={postData.post.categories[0].name}
         headingCategorySlug={postData.post.categories[0].slug}
+        breadLists={[
+          {
+            title: postData.post.categories[0].name,
+            slug: postData.post.categories[0].slug
+          },
+          { title: postData.post.title }
+        ]}
       >
         <Motion name={postData.post.title}>
           <article className={style.container}>

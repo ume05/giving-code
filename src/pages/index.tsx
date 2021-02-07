@@ -1,6 +1,7 @@
 import Layout from '@/components/Layout'
 import Post from '@/components/Post'
 import Motion from '@/components/Motion'
+import SEO from '@/components/SEO'
 import style from './style.module.css'
 import { GetStaticProps } from 'next'
 import { gql } from '@apollo/client'
@@ -20,6 +21,7 @@ export const getStaticProps: GetStaticProps = async () => {
             url
           }
           content {
+            raw
             text
           }
           categories {
@@ -46,6 +48,7 @@ type Props = {
 const Index: React.FC<Props> = ({ allpost }) => {
   return (
     <>
+      <SEO />
       <Layout isHeading={true}>
         <Motion name="index">
           <div className={style.container}>
@@ -57,7 +60,7 @@ const Index: React.FC<Props> = ({ allpost }) => {
                   day={post.date}
                   title={post.title}
                   category={post.categories[0].name}
-                  text={post.content.text}
+                  text={post.content.raw.children[0].children[0].text}
                   imagePath={post.coverImage?.url}
                   linkPath={`/article/${post.slug}/`}
                   categoryPath={`/${post.categories[0].slug}/`}

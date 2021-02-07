@@ -60,8 +60,8 @@ const Sidebar: React.FC<Props> = ({ onModalFlag }) => {
                                 ? post.coverImage?.url
                                 : '/image/sample.jpg'
                             }
-                            width={250}
-                            height={150}
+                            width={800}
+                            height={480}
                           />
                         </figure>
                         <div className={style.box}>
@@ -75,6 +75,27 @@ const Sidebar: React.FC<Props> = ({ onModalFlag }) => {
                   </li>
                 ))}
             </ul>
+          </div>
+        </div>
+        <div className={style.author}>
+          <h2>AUTHOR</h2>
+          <div className={style.content}>
+            <figure className={style.authorImage}>
+              <Img
+                src="/image/profile.jpg"
+                width={800}
+                height={800}
+                alt="著者イメージ"
+              />
+            </figure>
+            <p className="font-bold">Ume</p>
+            <p className="mb-2 text-sm">
+              和歌山県出身のフロントエンドエンジニアです。
+            </p>
+            <p className="font-bold text-sm">主にできること（増やしたい）</p>
+            <p className="text-sm break-all">
+              HTML、CSS、JavaScript、TypeScript、Vue.js(Nuxt.js)、React.js(Next.js,Gatsby.js)、WordPress、Git(GitHub)
+            </p>
           </div>
         </div>
       </aside>
