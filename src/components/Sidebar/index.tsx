@@ -60,8 +60,8 @@ const Sidebar: React.FC<Props> = ({ onModalFlag }) => {
                                 ? post.coverImage?.url
                                 : '/image/sample.jpg'
                             }
-                            width={250}
-                            height={150}
+                            width={800}
+                            height={480}
                           />
                         </figure>
                         <div className={style.box}>
@@ -83,8 +83,8 @@ const Sidebar: React.FC<Props> = ({ onModalFlag }) => {
             <figure className={style.authorImage}>
               <Img
                 src="/image/profile.jpg"
-                width={200}
-                height={200}
+                width={800}
+                height={800}
                 alt="著者イメージ"
               />
             </figure>

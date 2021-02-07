@@ -66,3 +66,14 @@
     padding-top: 44%;
   }
 }
+
+@media screen and (max-width: 767px){
+  .container {
+    width: 100%;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #d9d9d9;
+    & .image {
+      padding-top: 44%;
+    }
+  }
+}

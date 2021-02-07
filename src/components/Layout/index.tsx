@@ -42,7 +42,7 @@ const Layout: React.FC<Props> = ({
   }
   return (
     <>
-      <Header />
+      <Header onModalFlag={onModalFlag} />
       <main>
         <MV isHeading={isHeading} />
         <Heading

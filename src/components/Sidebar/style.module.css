@@ -28,6 +28,9 @@
     border: 2px solid #000;
     border-radius: 30px;
     transition: all 0.3s;
+    &:focus {
+      outline: none;
+    }
 
     & span {
       margin-left: 10px;
@@ -153,5 +156,20 @@
       margin-bottom: 10px;
       padding: 0 14px;
     }
+  }
+}
+
+@media screen and (max-width: 767px){
+  .wrapper {
+    width: 100%;
+  }
+  .search {
+    display: none;
+  }
+  .authorImage {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 10px;
+    padding: 0;
   }
 }
