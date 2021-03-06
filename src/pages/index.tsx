@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 import Post from '@/components/Post'
 import Motion from '@/components/Motion'
 import SEO from '@/components/SEO'
+import Loader from '@/components/Loader'
 import style from './style.module.css'
 import { GetStaticProps } from 'next'
 import { gql } from '@apollo/client'
@@ -46,9 +48,18 @@ type Props = {
 }
 
 const Index: React.FC<Props> = ({ allpost }) => {
+  const [cache, setCache] = useState(false)
+  useEffect(() => {
+    const flag = sessionStorage.getItem('key')
+    if (!flag) {
+      setCache(true)
+      sessionStorage.setItem('key', 'value')
+    }
+  }, [])
   return (
     <>
       <SEO />
+      {cache && <Loader />}
       <Layout isHeading={true}>
         <Motion name="index">
           <div className={style.container}>

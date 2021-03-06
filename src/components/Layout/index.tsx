@@ -6,6 +6,7 @@ import Sidebar from '@/components/Sidebar'
 import Footer from '@/components/Footer'
 import SearchModal from '@/components/SearchModal'
 import BreadCrumb from '@/components/BreadCrumb'
+import Loader from '@/components/Loader'
 import style from './style.module.css'
 
 type Props = {
